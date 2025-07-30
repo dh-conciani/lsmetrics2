@@ -274,7 +274,7 @@ lsm_morphology <- function(input,
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology"),
-                      rules = paste0("table_color_morphology_", year, ".txt")")
+                      rules = paste0("table_color_morphology_", year, ".txt"))
 
     tibble::tibble(values = 0:1, colors = c("white", "#cacaca")) %>%
         readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
