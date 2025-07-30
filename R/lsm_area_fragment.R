@@ -118,15 +118,15 @@ lsm_area_fragment <- function(input,
             fragment_area_unit_rounded %>%
                 dplyr::mutate(fid2 = fid) %>%
                 dplyr::select(fid, fid2, ncell) %>%
-                readr::write_delim("fragment_ncell.txt", delim = ":", col_names = FALSE)
+                readr::write_delim(paste0("fragment_ncell", year, ".txt"), delim = ":", col_names = FALSE)
 
             rgrass::execGRASS("r.recode",
                               flags = "overwrite",
                               input = paste0(input, output, "_fragment_id"),
                               output = paste0(input, output, "_fragment_ncell"),
-                              rules = "fragment_ncell.txt")
+                              rules = paste0("fragment_ncell", year, ".txt"))
 
-            unlink("fragment_ncell.txt")
+            unlink(paste0("fragment_ncell", year, ".txt"))
         }
 
         # table ----
