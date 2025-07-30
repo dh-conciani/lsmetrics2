@@ -27,7 +27,8 @@ lsm_area_fragment <- function(input,
                               map_fragment_ncell = FALSE,
                               map_fragment_area = TRUE,
                               table_fragment_area = FALSE,
-                              table_dir_output = ".") {
+                              table_dir_output = ".",
+                              year = NULL) {
 
     # region ----
     rgrass::execGRASS("g.region", flags = "a", raster = input)
@@ -94,13 +95,13 @@ lsm_area_fragment <- function(input,
             fragment_area_unit_rounded %>%
                 dplyr::mutate(fid2 = fid) %>%
                 dplyr::select(fid, fid2, area) %>%
-                readr::write_delim("fragment_area.txt", delim = ":", col_names = FALSE)
+                readr::write_delim(paste0("fragment_area", year, ".txt"), delim = ":", col_names = FALSE)
 
             rgrass::execGRASS("r.recode",
                               flags = "overwrite",
                               input = paste0(input, output, "_fragment_id"),
                               output = paste0(input, output, "_fragment_area"),
-                              rules = "fragment_area.txt"
+                              rules = paste0("fragment_area", year, ".txt")
             )
 
             rgrass::execGRASS("r.colors",
@@ -109,7 +110,7 @@ lsm_area_fragment <- function(input,
                               color = "ryg"
             )
 
-            unlink("fragment_area.txt")
+            unlink(paste0("fragment_area", year, ".txt"))
         }
 
         # ncell ----
