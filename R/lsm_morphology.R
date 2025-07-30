@@ -18,7 +18,8 @@ lsm_morphology <- function(input,
                            zero_as_null = FALSE,
                            morphology = "all",
                            nprocs = 1,
-                           memory = 300){
+                           memory = 300,
+                           year= NULL){
 
     # region ----
     rgrass::execGRASS("g.region", flags = "a", raster = input)
