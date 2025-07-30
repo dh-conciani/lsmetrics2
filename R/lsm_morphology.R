@@ -270,65 +270,65 @@ lsm_morphology <- function(input,
     rgrass::execGRASS(cmd = "g.message", message = "Changing raster color")
 
     tibble::tibble(values = 0:6, colors = c("#cacaca", "#33964a", "#9ed4b1", "#50aab3", "#ffcd24", "#f6b1cf", "#aed9e7")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology"),
-                      rules = "table_color_morphology.txt")
+                      rules = paste0("table_color_morphology_", year, ".txt")")
 
     tibble::tibble(values = 0:1, colors = c("white", "#cacaca")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology_matrix"),
-                      rules = "table_color_morphology.txt")
+                      rules = paste0("table_color_morphology_", year, ".txt"))
 
     tibble::tibble(values = 0:1, colors = c("white", "#33964a")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology_core"),
-                      rules = "table_color_morphology.txt")
+                      rules = paste0("table_color_morphology_", year, ".txt"))
 
     tibble::tibble(values = 0:1, colors = c("white", "#9ed4b1")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology_edge"),
-                      rules = "table_color_morphology.txt")
+                      rules =paste0("table_color_morphology_", year, ".txt"))
 
     tibble::tibble(values = 0:1, colors = c("white", "#50aab3")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology_corridor"),
-                      rules = "table_color_morphology.txt")
+                      rules = paste0("table_color_morphology_", year, ".txt"))
 
     tibble::tibble(values = 0:1, colors = c("white", "#ffcd24")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology_branch"),
-                      rules = "table_color_morphology.txt")
+                      rules = paste0("table_color_morphology_", year, ".txt"))
 
     tibble::tibble(values = 0:1, colors = c("white", "#f6b1cf")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology_stepping_stone"),
-                      rules = "table_color_morphology.txt")
+                      rules = paste0("table_color_morphology_", year, ".txt"))
 
     tibble::tibble(values = 0:1, colors = c("white", "#aed9e7")) %>%
-        readr::write_delim("table_color_morphology.txt", delim = " ", col_names = FALSE)
+        readr::write_delim(paste0("table_color_morphology_", year, ".txt"), delim = " ", col_names = FALSE)
     rgrass::execGRASS(cmd = "r.colors",
                       flags = "quiet",
                       map = paste0(input, output, "_morphology_perforation"),
-                      rules = "table_color_morphology.txt")
+                      rules = paste0("table_color_morphology_", year, ".txt"))
 
     # clean ----
     rgrass::execGRASS(cmd = "g.message", message = "Cleaning data")
 
-    unlink("table_color_morphology.txt")
+    unlink(paste0("table_color_morphology_", year, ".txt"))
 
     suppressWarnings(
         rgrass::execGRASS(cmd = "g.remove",
