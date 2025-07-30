@@ -23,7 +23,8 @@ lsm_perimeter <- function(input,
                           map_shape_index = FALSE,
                           map_fractal_index = FALSE,
                           nprocs = 1,
-                          memory = 300){
+                          memory = 300,
+                          year = NULL){
 
     # proj units ----
     proj_info <- rgrass::execGRASS("g.proj", flags = "g", intern = TRUE)
